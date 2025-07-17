@@ -2,10 +2,11 @@
   <head>
     <link rel="stylesheet" type="text/css" href="style.css">
     <h1>Welcome to my site!</h1>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   </head>
   <body>
     <p>This is a work in progress! ;)</p>
-    <img src="/images/Windows286-2.1-NOR-OEM-About.png" alt="About box for Windows/286 2.10 Norsk Data OEM">
+    <!--<img src="/images/Windows286-2.1-NOR-OEM-About.png" alt="About box for Windows/286 2.10 Norsk Data OEM">
     <img src="/images/Windows/XP/5.10.2267.png" alt="2267">
     <p>Windows 1.0x: 16/45 (~35.555%)</p>
     <p>Windows 2.xx: 9/25 (36%)</p>
@@ -18,5 +19,28 @@
     <p>Windows NT 4.0: 36/50 (72%)</p>
     <p>Windows 2000: 76/141 (~59.900%)</p>
     <p>Windows Pre-XP Total: 453/773 (~58.602%)</p>
+    <hr></hr>-->
+    <h3>Currently missing Windows builds (Up to Windows 10 1507)</h3>
+    <ul id="renderTxt_list">
+      </ul>
+      <input type="button" id="lesen" value="Read Data" />
   </body>
+  <script>
+    $(document).ready(function(){
+        $("#lesen").click(function() {
+            $.ajax({
+                url : "missingBuilds.txt",
+                dataType: "text",
+                success : function (data) {
+                    $html = "";
+                    var lines = data.split("\n");
+                    for (var i = 0, len = lines.length; i < len; i++) {
+                        $html += '<li>'+lines[i]+'</li>';
+                    }
+                    $("body ul").append($html);
+                }
+            });
+        });
+    });
+    </script>
 </html>
